@@ -1,10 +1,10 @@
 import {
+  withHttpTransferCache
+} from "./chunk-BAZR2FBL.js";
+import {
   CommonModule,
   PLATFORM_BROWSER_ID
 } from "./chunk-UTW4GUE5.js";
-import {
-  withHttpTransferCache
-} from "./chunk-BAZR2FBL.js";
 import {
   DomAdapter,
   XhrFactory,

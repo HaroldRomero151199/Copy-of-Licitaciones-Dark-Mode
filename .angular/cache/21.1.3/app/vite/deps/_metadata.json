@@ -1,52 +1,52 @@
 {
-  "hash": "8abdb545",
-  "configHash": "3ec7df59",
-  "lockfileHash": "9c607378",
-  "browserHash": "1c212425",
+  "hash": "c405136c",
+  "configHash": "b21b2194",
+  "lockfileHash": "2fac2407",
+  "browserHash": "5375cd70",
   "optimized": {
     "@angular/common": {
       "src": "../../../../../../node_modules/@angular/common/fesm2022/common.mjs",
       "file": "@angular_common.js",
-      "fileHash": "e3a202c0",
+      "fileHash": "d713733a",
       "needsInterop": false
     },
     "@angular/common/http": {
       "src": "../../../../../../node_modules/@angular/common/fesm2022/http.mjs",
       "file": "@angular_common_http.js",
-      "fileHash": "6cde9f7b",
+      "fileHash": "e8ce116b",
       "needsInterop": false
     },
     "@angular/core": {
       "src": "../../../../../../node_modules/@angular/core/fesm2022/core.mjs",
       "file": "@angular_core.js",
-      "fileHash": "6a8f42b5",
+      "fileHash": "df69b7cd",
       "needsInterop": false
     },
     "@angular/forms": {
       "src": "../../../../../../node_modules/@angular/forms/fesm2022/forms.mjs",
       "file": "@angular_forms.js",
-      "fileHash": "6190e912",
+      "fileHash": "c11dd84b",
       "needsInterop": false
     },
     "@angular/platform-browser": {
       "src": "../../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
       "file": "@angular_platform-browser.js",
-      "fileHash": "c04aac09",
+      "fileHash": "7280403c",
       "needsInterop": false
     },
     "rxjs/operators": {
       "src": "../../../../../../node_modules/rxjs/dist/esm5/operators/index.js",
       "file": "rxjs_operators.js",
-      "fileHash": "5120a563",
+      "fileHash": "0b725f47",
       "needsInterop": false
     }
   },
   "chunks": {
-    "chunk-UTW4GUE5": {
-      "file": "chunk-UTW4GUE5.js"
-    },
     "chunk-BAZR2FBL": {
       "file": "chunk-BAZR2FBL.js"
+    },
+    "chunk-UTW4GUE5": {
+      "file": "chunk-UTW4GUE5.js"
     },
     "chunk-RF3QPKAK": {
       "file": "chunk-RF3QPKAK.js"

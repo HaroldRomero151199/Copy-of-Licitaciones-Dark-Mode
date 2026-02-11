@@ -66,7 +66,14 @@ export class TenderService {
       closingDate: dto.closingDate || '',
       matchScore: dto.score,
       montoDisplay: dto.montoDisplay,
-      url: dto.url
+      url: dto.url,
+      description: dto.description,
+      region: dto.region,
+      comuna: dto.comuna,
+      type: dto.type,
+      complaintsLevel: dto.complaintsLevel?.toLowerCase(),
+      complaintsCount: dto.complaintsCount,
+      productsCount: dto.productsCount
     };
   }
 

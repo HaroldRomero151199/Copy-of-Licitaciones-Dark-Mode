@@ -45,5 +45,12 @@ export interface Tender {
   matchScore?: number; // from API's 'score'
   montoDisplay?: string; // texto del rango de monto
   url?: string; // enlace directo a Mercado Público desde la API
+  description?: string; // from API's 'description'
+  region?: string;
+  comuna?: string;
+  type?: string;
+  complaintsLevel?: string; // bajo, medio, alto
+  complaintsCount?: number;
+  productsCount?: number;
   tags?: string[]; // deprecated, pero mantenido por compatibilidad
 }
