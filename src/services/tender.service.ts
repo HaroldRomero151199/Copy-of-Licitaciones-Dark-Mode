@@ -18,13 +18,19 @@ export class TenderService {
    * @param query Search query string
    * @param page Page number (1-indexed)
    * @param size Page size (default: 20)
+   * @param statusCodes List of status codes to filter by (optional)
    * @returns Observable with SearchResponse containing pagination info and items
    */
-  searchTenders(query: string, page: number = 1, size: number = 20): Observable<SearchResponse> {
-    const params = new HttpParams()
-      .set('q', query.trim() || '')
+  searchTenders(query: string, page: number = 1, size: number = 20, statusCodes: number[] = []): Observable<SearchResponse> {
+    let params = new HttpParams()
+      .set('search_term', query.trim() || '')
       .set('page', page.toString())
       .set('size', size.toString());
+
+    // Add status codes if provided
+    statusCodes.forEach(code => {
+      params = params.append('status_codes', code.toString());
+    });
 
     // Use text response and parse JSON manually to be robust to
     // backends that may not set Content-Type: application/json.

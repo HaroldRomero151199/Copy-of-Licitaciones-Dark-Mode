@@ -1,4 +1,14 @@
 
+// Enum de códigos de estado de licitación
+export enum CodigoEstado {
+  PUBLICADA = 5,
+  CERRADA = 6,
+  DESIERTA = 7,
+  ADJUDICADA = 8,
+  REVOCADA = 15,
+  SUSPENDIDA = 16
+}
+
 // API Response DTO from backend
 export interface TenderSummaryDTO {
   id: string; // código externo (ej. "1002-11-LP26")
