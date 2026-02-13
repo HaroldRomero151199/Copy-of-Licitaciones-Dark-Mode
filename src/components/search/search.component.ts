@@ -19,6 +19,7 @@ export class SearchComponent {
 
   // --- UI State Signals ---
   searchQuery = signal<string>('');
+  searchBy = signal<'text' | 'id'>('text');
   isLoading = signal<boolean>(false);
   hasSearched = signal<boolean>(false);
   errorMessage = signal<string | null>(null);
@@ -32,7 +33,7 @@ export class SearchComponent {
   ]);
 
   statusOptions = [
-    { label: 'Publicada', value: CodigoEstado.PUBLICADA },
+    { label: 'Abierta', value: CodigoEstado.PUBLICADA },
     { label: 'Cerrada', value: CodigoEstado.CERRADA },
     { label: 'Desierta', value: CodigoEstado.DESIERTA },
     { label: 'Adjudicada', value: CodigoEstado.ADJUDICADA },
@@ -99,9 +100,39 @@ export class SearchComponent {
 
     this.isLoading.set(true);
     this.hasSearched.set(false);
-    this.currentPage.set(1);
 
-    this.loadPage(query, 1);
+    if (this.searchBy() === 'id') {
+      this.loadById(query);
+    } else {
+      this.currentPage.set(1);
+      this.loadPage(query, 1);
+    }
+  }
+
+  private loadById(id: string) {
+    this.tenderService.getTenderById(id)
+      .pipe(
+        finalize(() => this.isLoading.set(false))
+      )
+      .subscribe({
+        next: (dto) => {
+          const tender = this.tenderService.mapDtoToTender(dto);
+          this.tenders.set([tender]);
+          this.totalResults.set(1);
+          this.totalPagesFromServer.set(1);
+          this.hasSearched.set(true);
+        },
+        error: (err) => {
+          console.error('Error fetching tender by ID:', err);
+          this.tenders.set([]);
+          this.totalResults.set(0);
+          this.totalPagesFromServer.set(0);
+          this.hasSearched.set(true);
+          if (err.status === 404) {
+            this.errorMessage.set(`No se encontró la licitación con el código "${id}"`);
+          }
+        }
+      });
   }
 
   private loadPage(query: string, page: number) {

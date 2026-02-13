@@ -1,9 +1,11 @@
 
 import { Injectable, inject } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Tender, SearchResponse, TenderSummaryDTO } from '../models/tender.interface';
+
+import { ADMIN_TOKEN } from '../environment';
 
 @Injectable({
   providedIn: 'root'
@@ -32,10 +34,15 @@ export class TenderService {
       params = params.append('status_codes', code.toString());
     });
 
+    // Add API key header
+    const headers = new HttpHeaders({
+      'X-ADMIN-TOKEN': ADMIN_TOKEN
+    });
+
     // Use text response and parse JSON manually to be robust to
     // backends that may not set Content-Type: application/json.
     return this.http
-      .get(`${this.apiBaseUrl}/search`, { params, responseType: 'text' as const })
+      .get(`${this.apiBaseUrl}/search`, { params, headers, responseType: 'text' as const })
       .pipe(
         map((raw: string) => {
           try {
@@ -91,5 +98,29 @@ export class TenderService {
     return this.searchTenders(query, 1, 100).pipe(
       map(response => response.items.map(dto => this.mapDtoToTender(dto)))
     );
+  }
+
+  /**
+   * Get a single tender by its ID.
+   * @param id The External ID of the tender
+   * @returns Observable with TenderSummaryDTO
+   */
+  getTenderById(id: string): Observable<TenderSummaryDTO> {
+    const headers = new HttpHeaders({
+      'X-ADMIN-TOKEN': ADMIN_TOKEN
+    });
+
+    return this.http
+      .get(`${this.apiBaseUrl}/tenders/${id}`, { headers, responseType: 'text' as const })
+      .pipe(
+        map((raw: string) => {
+          try {
+            return JSON.parse(raw) as TenderSummaryDTO;
+          } catch (e) {
+            console.error(`Failed to parse /tenders/${id} response as JSON`, e, raw);
+            throw e;
+          }
+        })
+      );
   }
 }

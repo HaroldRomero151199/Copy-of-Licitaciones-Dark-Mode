@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment settings (contains sensitive tokens)
+src/environment.ts
